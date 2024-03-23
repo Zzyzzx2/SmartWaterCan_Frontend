@@ -26,12 +26,16 @@ const Dashboard = () => {
     try {
       const waterCansCollection = collection(db, "waterCans");
       const querySnapshot = await getDocs(
-        query(waterCansCollection, orderBy("timestampField"))
+        query(waterCansCollection, orderBy("orderfield"))
       );
-      const waterCansList = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const waterCansList = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          ...data,
+          timestampField: new Date().toLocaleString(), // Convert timestamp to string
+        };
+      });
       setCans(waterCansList);
     } catch (error) {
       console.error("Error fetching water cans:", error);
@@ -65,7 +69,8 @@ const Dashboard = () => {
       phoneNumber: "123-456-7890",
       image: "data/screenshot.png",
       fetchInterval: 30,
-      timestampField: serverTimestamp(),
+      timestampField: new Date().toLocaleString(),
+      orderfield: serverTimestamp(),
     });
     fetchWaterCans(); // Fetch updated water cans after adding
   };
