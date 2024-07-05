@@ -26,6 +26,21 @@ const Login = () => {
         // ..
       });
   };
+  const handleGuestLogin = () => {
+    username = "guest@123.com";
+    password = "guest123";
+    signInWithEmailAndPassword(auth, username, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        dispatch({ type: "LOGIN", payload: user });
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        setErrorMessage(true);
+        // ..
+      });
+  };
   return (
     <div>
       <section className="bg-gradient-to-b from-blue-500 to-blue-300 h-screen flex justify-center items-center">
@@ -50,8 +65,8 @@ const Login = () => {
               required
             />
             <p className="text-gray-500 text-sm mt-12 text-right cursor-pointer">
-              <span className="hover:opacity-50">
-                Forgot Password?<span className="text-sm">?</span>
+              <span className="hover:opacity-50" onClick={handleGuestLogin}>
+                Guest Login<span className="text-sm">?</span>
               </span>
             </p>
 
