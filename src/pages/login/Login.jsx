@@ -66,7 +66,7 @@ const Login = () => {
             />
             <p className="text-gray-500 text-sm mt-12 text-right cursor-pointer">
               <span className="hover:opacity-50" onClick={handleGuestLogin}>
-                Guest Login<span className="text-sm">?</span>
+                Login without credentials
               </span>
             </p>
 
