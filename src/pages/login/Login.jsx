@@ -27,8 +27,8 @@ const Login = () => {
       });
   };
   const handleGuestLogin = () => {
-    username = "guest@123.com";
-    password = "guest123";
+    const username = "guest@123.com";
+    const password = "guest123";
     signInWithEmailAndPassword(auth, username, password)
       .then((userCredential) => {
         // Signed up
